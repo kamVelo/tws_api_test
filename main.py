@@ -28,13 +28,14 @@ class ToMarket(EWrapper, EClient):
         # connects app to TWS
         self.connect("127.0.0.1", 7497, 999)
 
-        #creates and starts EReader thread
+        # creates and starts EReader thread
         run = Thread(target=self.run, daemon=True)
         run.start()
 
-        #ensures that app always disconnects cleanly
+        # ensures that app always disconnects cleanly
         atexit.register(self.end)
-        sleep(2)
+        # waits to ensure no EReader based errors occur.
+        sleep(2) # this shouldn't be in production file because use-case is such that this error would not occur in the first place.
     def nextValidId(self, orderId: int):
         """
         EWrapper function to receive the new order id and set member variable
