@@ -125,7 +125,12 @@ class ToMarket(EWrapper, EClient):
         while not self.accountSummaryReceived: # waits until account summary received to return value
             pass
         return self.balance
+    def position(self, account:str, contract:Contract, position:float,avgCost:float):
+        print(f"position: {position}")
+        print(f"avgCost: {avgCost}")
 
+    def positionEnd(self):
+        print("END")
     def end(self):
         """
         exit function to cleanly disconnect from TWS
@@ -133,4 +138,4 @@ class ToMarket(EWrapper, EClient):
         """
         print("TRADER DISCONNECTING")
         self.done = True # shuts down EReader thread
-        self.disconnect() # disconnects from TWS
+        self.disconnect() # disconnects from TW
